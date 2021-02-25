@@ -8,6 +8,13 @@ use Alura\Leilao\Model\{Leilao, Usuario, Lance};
 
 class AvaliadorTest extends TestCase
 {
+    private $leiloeiro;
+
+    protected function setUp(): void
+    {
+        $this->leiloeiro = new Avaliador();
+    }
+
     /**
      * @dataProvider leilaoEmOrdemAleatoria
      * @dataProvider leilaoEmOrdemCrescente
@@ -15,14 +22,10 @@ class AvaliadorTest extends TestCase
      */
     public function testAvaliadorDeveEncontrarOMaiorValorDeLances(Leilao $leilao)
     {
-        // Arrange - Given / Preparamos o cenário do teste
-
-        $leiloeiro = new Avaliador();
-
         // Act - When / Executamos o código a ser testado
-        $leiloeiro->avalia($leilao);
+        $this->leiloeiro->avalia($leilao);
 
-        $maiorValor = $leiloeiro->getMaiorValor();
+        $maiorValor = $this->leiloeiro->getMaiorValor();
 
         // Assert - Then / Verificamos se a saída é a esperada
         $this->assertEquals(2500, $maiorValor);
@@ -35,14 +38,10 @@ class AvaliadorTest extends TestCase
      */
     public function testAvaliadorDeveEncontrarOMenorValorDeLances(Leilao $leilao)
     {
-        // Arrange - Given / Preparamos o cenário do teste
-
-        $leiloeiro = new Avaliador();
-
         // Act - When / Executamos o código a ser testado
-        $leiloeiro->avalia($leilao);
+        $this->leiloeiro->avalia($leilao);
 
-        $maiorValor = $leiloeiro->getMenorValor();
+        $maiorValor = $this->leiloeiro->getMenorValor();
 
         // Assert - Then / Verificamos se a saída é a esperada
         self::assertEquals(1700, $maiorValor);
@@ -56,12 +55,9 @@ class AvaliadorTest extends TestCase
      */
     public function testAvaliadorDeveBuscar3MaioresValores(Leilao $leilao)
     {
-        // Arrange - Given / Preparamos o cenário do teste
-        $leiloeiro = new Avaliador();
-
-        $leiloeiro->avalia($leilao);
+        $this->leiloeiro->avalia($leilao);
     
-        $maiores = $leiloeiro->getMaioresLances();
+        $maiores = $this->leiloeiro->getMaioresLances();
         static::assertCount(3, $maiores);
         static::assertEquals(2500, $maiores[0]->getValor());
         static::assertEquals(2000, $maiores[1]->getValor());
