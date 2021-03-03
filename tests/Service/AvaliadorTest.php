@@ -60,7 +60,7 @@ class AvaliadorTest extends TestCase
         $this->leiloeiro->avalia($leilao);
     
         $maiores = $this->leiloeiro->getMaioresLances();
-        static::assertCount(2, $maiores);
+        static::assertCount(3, $maiores);
         static::assertEquals(2500, $maiores[0]->getValor());
         static::assertEquals(2000, $maiores[1]->getValor());
         static::assertEquals(1700, $maiores[2]->getValor());
