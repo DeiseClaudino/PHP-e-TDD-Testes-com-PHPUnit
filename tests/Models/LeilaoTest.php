@@ -39,4 +39,17 @@ class LeilaoTest extends TestCase
             '1-lance' => [1, $leilaoCom1Lance, [5000]]
         ];
     }
+
+    public function testLeilaoNaoDeveReceberLancesRepetidos()
+    {
+        $leilao = new Leilao('Variante');
+        $ana = new Usuario('Ana');
+
+        $leilao->recebeLance(new Lance($ana, 1000));
+        $leilao->recebeLance(new Lance($ana, 1500));
+
+        static::assertCount(1, $leilao->getLances());
+        static::assertEquals(1000, $leilao->getLances()[0]->getValor());
+        
+    }
 }
