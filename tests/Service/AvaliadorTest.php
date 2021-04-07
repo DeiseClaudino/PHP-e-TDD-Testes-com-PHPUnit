@@ -8,6 +8,7 @@ use Alura\Leilao\Model\{Leilao, Usuario, Lance};
 
 class AvaliadorTest extends TestCase
 {
+    /** @var Avaliador */
     private $leiloeiro;
 
     protected function setUp(): void
@@ -122,6 +123,12 @@ class AvaliadorTest extends TestCase
         return [
             'ordem-aleatoria' => [$leilao]
         ];
+    }
+
+    public function testLeilaoVazioNaoPodeSerAvaliado()
+    {
+        $leilao = new Leilao('Fusca Azul');
+        $this->leiloeiro->avalia($leilao);
     }
 
 }
